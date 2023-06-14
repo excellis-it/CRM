@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,7 @@ use App\Http\Controllers\Api\AuthController;
 
 Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [AuthController::class, 'login']);  // login api
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::post('role',[RoleController::class,'storeRole']); // post api
+    });
 });
