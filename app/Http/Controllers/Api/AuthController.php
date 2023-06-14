@@ -43,10 +43,10 @@ class AuthController extends Controller
                     $data['details'] = $user;
                     return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
                 } else {
-                    return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Invalid user & Password!'], 401);
+                    return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Invalid email & Password!'], 401);
                 }
             } else {
-                return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Invalid user & Password!'], 401);
+                return response()->json(['status' => false, 'statusCode' => 401, 'error' => 'Invalid email & Password!'], 401);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
