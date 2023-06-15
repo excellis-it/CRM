@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AdminAssignSeeder extends Seeder
 {
@@ -21,5 +23,6 @@ class AdminAssignSeeder extends Seeder
         $admin->status = true;
         $admin->save();
         $admin->assignRole('ADMIN');
+
     }
 }

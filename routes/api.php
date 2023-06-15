@@ -22,7 +22,9 @@ use App\Http\Controllers\Api\RoleController;
 
 Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [AuthController::class, 'login']);  // login api
-    Route::group(['middleware' => 'auth:api'], function () {
-        Route::post('role',[RoleController::class,'storeRole']); // post api
+    Route::group(['prefix' => 'role','middleware' => 'auth:api'], function () {
+        Route::get('list',[RoleController::class,'roleList']); // listing api
+        Route::post('create',[RoleController::class,'roleCreate']); // create api
+        Route::post('edit',[RoleController::class,'roleEdit']); // edit api
     });
 });

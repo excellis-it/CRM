@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleAssignseeder extends Seeder
 {
@@ -14,24 +15,33 @@ class RoleAssignseeder extends Seeder
      */
     public function run()
     {
-        $roles = [
-            [
-                'name' => 'ADMIN',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'MANAGER',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'TEAMLEADER',
-                'guard_name' => 'web',
-            ]
-        ];
+        $adminRole = Role::create(['name' => 'ADMIN']);
+        $managerRole = Role::create(['name' => 'MANAGER']);
+        $teamLeadRole = Role::create(['name' => 'TEAMLEAD']);
 
-        foreach ($roles as $key => $value) {
-            Role::create($value);
-        }
+        $permission = Permission::create(['name' => 'Role list']);
+        $permission = Permission::create(['name' => 'Role edit']);
+        $permission = Permission::create(['name' => 'Role create']);
+        $permission = Permission::create(['name' => 'Role delete']);
+
+        $permission = Permission::create(['name' => 'User list']);
+        $permission = Permission::create(['name' => 'User edit']);
+        $permission = Permission::create(['name' => 'User create']);
+        $permission = Permission::create(['name' => 'User delete']);
+
+        $permission = Permission::create(['name' => 'Permission list']);
+        $permission = Permission::create(['name' => 'Permission edit']);
+        $permission = Permission::create(['name' => 'Permission create']);
+        $permission = Permission::create(['name' => 'Permission delete']);
+
+        $adminRole->givePermissionTo(Permission::all());
+
+        // $managerRole->givePermissionTo([
+        //     'create-blog-posts',
+        //     'edit-blog-posts',
+        //     'delete-blog-posts',
+        // ]);
+
 
     }
 }
