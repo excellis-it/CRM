@@ -17,7 +17,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|exists:users,email',
-            'password' => 'required|min:8',
+            'password' => 'required|min:8'
         ]);
 
         if ($validator->fails()) {
@@ -37,7 +37,7 @@ class AuthController extends Controller
             if(Auth::attempt(['email'=> $request->email, 'password' => $request->password]))
             {
                  $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
-                if ($user->status == 1) {
+                if ($user->status == 1 ) {
                     $data['auth_token'] = $user->createToken('accessToken')->accessToken;
                     $data['role'] = $user->roles()->pluck('name');
                     $data['details'] = $user;

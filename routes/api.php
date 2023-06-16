@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +29,18 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('list',[RoleController::class,'roleList']); // listing api
         Route::post('create',[RoleController::class,'roleCreate']); // create api
         Route::post('edit',[RoleController::class,'roleEdit']); // edit api
+        Route::post('update',[RoleController::class,'roleUpdate']); // edit api
+        Route::post('delete',[RoleController::class,'roleDelete']); // delete api
+    });
+    Route::group(['prefix' => 'permission','middleware' => 'auth:api'], function () {
+        Route::get('list',[PermissionController::class,'permissionList']); // listing api
+        Route::post('create',[PermissionController::class,'permissionCreate']); // create api
+        Route::post('edit',[PermissionController::class,'permissionEdit']); // edit api
+        Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
+    });
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('list', [UserController::class, 'list']);  // list api
+        Route::post('create', [UserController::class, 'create']);  // create api
     });
 });

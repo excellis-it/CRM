@@ -74,6 +74,28 @@ class RoleController extends Controller
         $this->validate($request, [
             'role_id' => 'required|exists:roles,id',
         ]);
+        try {
+            $get_role = Role::where('id', $request->role_id)->first();
+            return response()->json([
+                'data' => $get_role,
+                'success' => true,
+                'message' => 'Role detail find successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
+       
+    }
+
+    public function roleUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'role_id' => 'required|exists:roles,id',
+            'name' => 'required'
+        ]);
         
         try {
             $check_role = Role::where('id', $request->role_id)->first();
@@ -83,7 +105,29 @@ class RoleController extends Controller
             
             return response()->json([
                 'success' => true,
-                'message' => 'Role created successfully'
+                'message' => 'Role update successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
+
+    public function roleDelete(Request $request)
+    {
+        $this->validate($request, [
+            'role_id' => 'required|exists:roles,id',
+        ]);
+        
+        try {
+            $role = Role::where('id', $request->role_id)->first();
+            $role->delete();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Role deleted successfully'
             ]);
         } catch (\Throwable $th) {
             return response()->json([
