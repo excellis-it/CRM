@@ -7,11 +7,47 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
     //
     public $successStatus = 200;
+    /** 
+     * Login Api 
+     * 
+     * @return \Illuminate\Http\Response 
+     * @bodyParam email string required email, must be unique.
+     * @bodyParam password string required password, must be 8 character long.
+     * @response {
+     * "status": true,
+     * "statusCode": 200,
+     * "message": "Login successfully.",
+     * "data": {
+     *      "user": {
+     *          "id": 1,
+     *          "name": "John Doe",
+     *          "email": "johh@yopmail.com",
+     *          "status": 1 
+     *       }
+     *   }
+     * }
+     * @response 401 {
+     * "status": false,
+     * "statusCode": 401,
+     * "error": {
+     * "message": [
+     * "The email field is required.",
+     * "The password field is required.",
+     * 
+     * ]
+     *  }
+     * }
+     * @response 401 {
+     * "message": "No detail found!",
+     * "status": false
+     * }
+     */
 
     public function login(Request $request)
     {
@@ -36,10 +72,10 @@ class AuthController extends Controller
         try {
             if(Auth::attempt(['email'=> $request->email, 'password' => $request->password]))
             {
-                 $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
+                $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
                 if ($user->status == 1 ) {
                     $data['auth_token'] = $user->createToken('accessToken')->accessToken;
-                    $data['role'] = $user->roles()->pluck('name');
+                    $data['role'] = $user->roles()->first(['id','name']);
                     $data['details'] = $user;
                     return response()->json(['status' => true, 'statusCode' => 200, 'data' => $data], $this->successStatus);
                 } else {

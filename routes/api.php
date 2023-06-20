@@ -25,22 +25,23 @@ use App\Http\Controllers\Api\UserController;
 
 Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [AuthController::class, 'login']);  // login api
-    Route::group(['prefix' => 'role','middleware' => 'auth:api'], function () {
+    Route::group(['prefix' => 'roles','middleware' => 'auth:api'], function () {
         Route::get('list',[RoleController::class,'roleList']); // listing api
         Route::post('create',[RoleController::class,'roleCreate']); // create api
         Route::post('edit',[RoleController::class,'roleEdit']); // edit api
         Route::post('update',[RoleController::class,'roleUpdate']); // edit api
         Route::post('delete',[RoleController::class,'roleDelete']); // delete api
     });
-    Route::group(['prefix' => 'permission','middleware' => 'auth:api'], function () {
+    Route::group(['prefix' => 'permissions','middleware' => 'auth:api'], function () {
         Route::get('list',[PermissionController::class,'permissionList']); // listing api
+        Route::post('list-by-role',[PermissionController::class,'permissionsByRole']); // listing api
         Route::post('create',[PermissionController::class,'permissionCreate']); // create api
         Route::post('edit',[PermissionController::class,'permissionEdit']); // edit api
         Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
     });
 
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('list', [UserController::class, 'list']);  // list api
-        Route::post('create', [UserController::class, 'create']);  // create api
+    Route::group(['prefix' => 'users','middleware' => 'auth:api'], function () {
+        Route::get('list', [UserController::class, 'userList']);  // list api
+        Route::post('create', [UserController::class, 'userCreate']);  // create api
     });
 });

@@ -79,9 +79,13 @@ class PermissionController extends Controller
 
     public function permissionCreate(Request $request)
     {
-        $this->validate($request, [
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required|unique:permissions,name',
         ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
 
         try {
             $permission = new Permission;
@@ -100,6 +104,39 @@ class PermissionController extends Controller
             ]);
         }
     }  
+
+    public function permissionsByRole(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'role_id' => 'required|numeric|exists:roles,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
+        $role = Role::select('id','name')->with('permissions:id,name')->where('id',$request->role_id)->get();
+        try {
+            $count = $role->count();
+            if ($count > 0) {
+                return response()->json([
+                    'data' => $role,
+                    'success' => true,
+                    'message' => 'Permission list found successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'data' => [],
+                    'success' => false,
+                    'message' => 'Permission list empty'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [],
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
 
 
 }

@@ -19,26 +19,62 @@ class UserController extends Controller
     /* 
     *  @user list
     *  @response 200 {
-    * "data": [
-    * {
-    * "id": 1,
-    * "name": "create user",
-    * "guard_name": "web",
-    * "created_at": "2021-01-01T00:00:00.000000Z",
-    * "updated_at": "2021-01-01T00:00:00.000000Z"
-    * },
+    *   "success": true,
+    *   "message": "User list find successfully"
+    *   "data": [
+        *  {
+            "id": 1,
+            "name": "ADMIN",
+            "guard_name": "web",
+            "users": [
+                {
+                    "id": 1,
+                    "name": "Super Admin",
+                    "email": "admin@yopmail.com",
+                    "pivot": {
+                        "role_id": 1,
+                        "model_id": 1,
+                        "model_type": "App\\Models\\User"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "MANAGER",
+            "guard_name": "web",
+            "users": [
+                {
+                    "id": 2,
+                    "name": "Swarna Manager",
+                    "email": "swarna@gmail.ocm",
+                    "pivot": {
+                        "role_id": 2,
+                        "model_id": 2,
+                        "model_type": "App\\Models\\User"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "Swarna Manager",
+                    "email": "sri@gmail.ocm",
+                    "pivot": {
+                        "role_id": 2,
+                        "model_id": 4,
+                        "model_type": "App\\Models\\User"
+                    }
+                }
+            ]
+        },
     * },
     */
-    public function list()
+    public function userList()
     {
-        $user = User::orderBy('id','desc')->get();
-        foreach ($user as $key => $value) {
-            $user[$key]['role'] = $value->roles()->pluck('name');
-        }
-        $data['details'] = $user;
+        $users = Role::select('id','name','guard_name')->with('users:users.id,name,email')->get();
+        $data['details'] = $users;
         
         try {
-            $count = $user->count();
+            $count = $users->count();
             if ($count > 0) {
                 return response()->json([
                     'data' => $data,
@@ -61,8 +97,74 @@ class UserController extends Controller
         }
     }
 
-    public function create()
+    /*
+    *  @user create
+    *  @response 200 {
+    *    "name": "Swarna Manager",
+    *    "email": "sri@gmail.ocm",
+    *    "status": 1,
+    *    "updated_at": "2023-06-20T10:44:03.000000Z",
+    *    "created_at": "2023-06-20T10:44:03.000000Z",
+    *    "id": 4,
+    *    "roles": [
+    *           {
+    *               "id": 2,
+    *               "name": "MANAGER",
+    *               "guard_name": "web",
+    *               "created_at": "2023-06-16T04:32:56.000000Z",
+    *               "updated_at": "2023-06-16T04:32:56.000000Z",
+    *               "pivot": {
+    *                   "model_id": 4,
+    *                   "role_id": 2,
+    *                   "model_type": "App\\Models\\User"
+    *               }
+    *           }
+    *       ]
+    *    },
+    *    "status": true,
+    *    "statusCode": 200,
+    *    "message": "User created successfully"
+    * },
+    */
+
+    public function userCreate(Request $request)
     {
-         
+        $validator = Validator::make($request->all(), [
+            'name'     => 'required',
+            'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+            'password' => 'required|min:8',
+            'user_type' => 'required|exists:roles,name',
+        ]);
+
+        if ($validator->fails()) {
+            $errors['message'] = [];
+            $data = explode(',', $validator->errors());
+
+            for ($i = 0; $i < count($validator->errors()); $i++) {
+                // return $data[$i];
+                $dk = explode('["', $data[$i]);
+                $ck = explode('"]', $dk[1]);
+                $errors['message'][$i] = $ck[0];
+            }
+            return response()->json(['status' => false, 'statusCode' => 401,'error' => $errors], 401);
+        }
+
+        try {
+            $check_user = User::where('email', $request->email)->first();
+            if ($check_user) {
+                return response()->json(['status' => false, 'statusCode' => 401,'error' => 'Email already exists'], 401);
+            }
+            $user = new User();
+            $user->name = $request->name;
+            $user->email    = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->status = 1;
+            $user->save();
+            $user->assignRole($request->user_type);
+
+            return response()->json(['data' => $user ,'status' => true, 'statusCode' => 200, 'message' => 'User created successfully'], 200);
+        }catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+        }
     }
 }
