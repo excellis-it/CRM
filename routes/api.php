@@ -26,7 +26,7 @@ use App\Http\Controllers\Api\UserController;
 Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [AuthController::class, 'login']);  // login api
     Route::group(['prefix' => 'roles','middleware' => 'auth:api'], function () {
-        Route::get('list',[RoleController::class,'roleList']); // listing api
+        Route::post('list',[RoleController::class,'roleList']); // listing api
         Route::post('create',[RoleController::class,'roleCreate']); // create api
         Route::post('edit',[RoleController::class,'roleEdit']); // edit api
         Route::post('update',[RoleController::class,'roleUpdate']); // edit api

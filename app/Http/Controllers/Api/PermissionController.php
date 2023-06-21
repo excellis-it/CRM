@@ -13,6 +13,13 @@ use Spatie\Permission\Models\Permission;
  */
 class PermissionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:Permission list|Permission create|Permission edit|Permission delete', ['only' => ['permissionList']]);
+        $this->middleware('permission:Permission create', ['only' => ['permissionCreate']]);
+        $this->middleware('permission:Permission edit', ['only' => ['roleEdit','roleUpdate']]);
+        $this->middleware('permission:Permission delete', ['only' => ['roleDelete']]);
+    }
     /**
      * Permission list
      * @response 200 {
