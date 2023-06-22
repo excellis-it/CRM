@@ -36,12 +36,8 @@ class RoleAssignseeder extends Seeder
 
         $adminRole->givePermissionTo(Permission::all());
 
-        // $managerRole->givePermissionTo([
-        //     'create-blog-posts',
-        //     'edit-blog-posts',
-        //     'delete-blog-posts',
-        // ]);
-
-
+        $managerRole->givePermissionTo([
+            'User list',
+        ]);
     }
 }

@@ -297,4 +297,33 @@ class RoleController extends Controller
             ]);
         }
     }
+
+    public function assignPermission(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), [
+            'role_id' => 'required|numeric|exists:roles,id',
+            'permission_id' => 'required|exists:permissions,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
+
+        try {
+            $role = Role::where('id', $request->role_id)->first();
+            $role->givePermissionTo([
+                $request->permission_id
+            ]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Permission assign successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
 }

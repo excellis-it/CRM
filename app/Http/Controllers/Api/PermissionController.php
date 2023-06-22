@@ -52,7 +52,7 @@ class PermissionController extends Controller
                 return response()->json([
                     'data' => $permission,
                     'success' => true,
-                    'message' => 'Permission list successfully'
+                    'message' => 'Permission list found successfully'
                 ]);
             } else {
                 return response()->json([
@@ -145,5 +145,64 @@ class PermissionController extends Controller
         }
     }
 
+    public function permissionEdit(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'permission_id' => 'required|numeric|exists:permissions,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
+        $permission = Permission::findOrFail($request->permission_id);
+        try {
+            $count = $permission->count();
+            if ($count > 0) {
+                return response()->json([
+                    'data' => $permission,
+                    'success' => true,
+                    'message' => 'Permission found successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'data' => [],
+                    'success' => false,
+                    'message' => 'Permission not found'
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [],
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
+
+    public function permissionUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'permission_id' => 'required|numeric|exists:permissions,id',
+            'name' => 'required|unique:permissions,name,'.$request->permission_id,
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
+        $permission = Permission::findOrFail($request->permission_id);
+        try {
+            $permission->name = $request->input('name');
+            $permission->guard_name = 'web';
+            $permission->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Permission updated successfully'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
 
 }
