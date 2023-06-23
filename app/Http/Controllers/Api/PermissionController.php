@@ -15,10 +15,10 @@ class PermissionController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:Permission list|Permission create|Permission edit|Permission delete', ['only' => ['permissionList']]);
-        $this->middleware('permission:Permission create', ['only' => ['permissionCreate']]);
-        $this->middleware('permission:Permission edit', ['only' => ['roleEdit','roleUpdate']]);
-        $this->middleware('permission:Permission delete', ['only' => ['roleDelete']]);
+        // $this->middleware('permission:Permission list|Permission create|Permission edit|Permission delete', ['only' => ['permissionList']]);
+        // $this->middleware('permission:Permission create', ['only' => ['permissionCreate']]);
+        // $this->middleware('permission:Permission edit', ['only' => ['roleEdit','roleUpdate']]);
+        // $this->middleware('permission:Permission delete', ['only' => ['roleDelete']]);
     }
     /**
      * Permission list
@@ -47,18 +47,26 @@ class PermissionController extends Controller
     {
         $permission = Permission::latest()->get();
         try {
-            $count = $permission->count();
-            if ($count > 0) {
-                return response()->json([
-                    'data' => $permission,
-                    'success' => true,
-                    'message' => 'Permission list found successfully'
-                ]);
-            } else {
+            if(Auth::user()->hasPermissionTo('Permission list')){   
+                $count = $permission->count();
+                if ($count > 0) {
+                    return response()->json([
+                        'data' => $permission,
+                        'success' => true,
+                        'message' => 'Permission list found successfully'
+                    ]);
+                } else {
+                    return response()->json([
+                        'data' => [],
+                        'success' => false,
+                        'message' => 'Permission list empty'
+                    ]);
+                }
+            }else{
                 return response()->json([
                     'data' => [],
                     'success' => false,
-                    'message' => 'Permission list empty'
+                    'message' => 'Permission denied'
                 ]);
             }
         } catch (\Throwable $th) {
@@ -72,7 +80,7 @@ class PermissionController extends Controller
 
     /**
      * Permission create
-     * @bodyParam name string required The name of the permission. Example: create user
+     * @bodyParam name string required The name of the permission. Example: create permission
      * @response 200 {
      * "success": true,
      * "message": "Permission created successfully"
@@ -86,7 +94,6 @@ class PermissionController extends Controller
 
     public function permissionCreate(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:permissions,name',
         ]);
@@ -95,15 +102,23 @@ class PermissionController extends Controller
         }
 
         try {
-            $permission = new Permission;
-            $permission->name = $request->input('name');
-            $permission->guard_name = 'web';
-            $permission->save();
+            if(Auth::user()->hasPermissionTo('Permission create')){   
+                $permission = new Permission;
+                $permission->name = $request->input('name');
+                $permission->guard_name = 'web';
+                $permission->save();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Permission created successfully'
-            ]);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Permission created successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Permission denied'
+                ]);
+            }
+            
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
@@ -111,6 +126,29 @@ class PermissionController extends Controller
             ]);
         }
     }  
+
+    /*
+    *    @Permission by role
+    *    @bodyParam role_id int required The id of the role. Example: 1
+    *    @response 200 {
+    *    "data": [
+    *    {
+    *    "id": 1,
+    *    "name": "create user",
+    *    "guard_name": "web",
+    *    "created_at": "2021-01-01T00:00:00.000000Z",
+    *    "updated_at": "2021-01-01T00:00:00.000000Z"
+    *    },
+    *    },
+    *    "success": true,
+    *    "message": "Permission list successfully"
+    *    }
+    *    @ response 401 {
+    *    "data": [],
+    *    "success": false,
+    *    "message": "Permission list empty"
+    *    }
+    */
 
     public function permissionsByRole(Request $request)
     {
@@ -122,18 +160,26 @@ class PermissionController extends Controller
         }
         $role = Role::select('id','name')->with('permissions:id,name')->where('id',$request->role_id)->get();
         try {
-            $count = $role->count();
-            if ($count > 0) {
-                return response()->json([
-                    'data' => $role,
-                    'success' => true,
-                    'message' => 'Permission list found successfully'
-                ]);
-            } else {
+            if(Auth::user()->hasPermissionTo('Permission list-by-role')){  
+                $count = $role->count();
+                if ($count > 0) {
+                    return response()->json([
+                        'data' => $role,
+                        'success' => true,
+                        'message' => 'Permission list found successfully'
+                    ]);
+                } else {
+                    return response()->json([
+                        'data' => [],
+                        'success' => false,
+                        'message' => 'Permission list empty'
+                    ]);
+                }
+            }else{
                 return response()->json([
                     'data' => [],
                     'success' => false,
-                    'message' => 'Permission list empty'
+                    'message' => 'Permission denied'
                 ]);
             }
         } catch (\Throwable $th) {
@@ -145,6 +191,27 @@ class PermissionController extends Controller
         }
     }
 
+    /*
+    *    @Permission edit
+    *    @bodyParam permission_id int required The id of the permission. Example: 1
+    *    @response 200 {
+    *    "data": {
+    *    "id": 1,
+    *    "name": "create user",
+    *    "guard_name": "web",
+    *    "created_at": "2021-01-01T00:00:00.000000Z",
+    *    "updated_at": "2021-01-01T00:00:00.000000Z"
+    *    },
+    *    "success": true,
+    *    "message": "Permission found successfully"
+    *    }
+    *    @ response 401 {
+    *    "data": [],
+    *    "success": false,
+    *    "message": "Permission not found"
+    *    }
+    */
+
     public function permissionEdit(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -155,18 +222,26 @@ class PermissionController extends Controller
         }
         $permission = Permission::findOrFail($request->permission_id);
         try {
-            $count = $permission->count();
-            if ($count > 0) {
-                return response()->json([
-                    'data' => $permission,
-                    'success' => true,
-                    'message' => 'Permission found successfully'
-                ]);
-            } else {
+            if(Auth::user()->hasPermissionTo('Permission edit')){   
+                $count = $permission->count();
+                if ($count > 0) {
+                    return response()->json([
+                        'data' => $permission,
+                        'success' => true,
+                        'message' => 'Permission found successfully'
+                    ]);
+                } else {
+                    return response()->json([
+                        'data' => [],
+                        'success' => false,
+                        'message' => 'Permission not found'
+                    ]);
+                }
+            }else{
                 return response()->json([
                     'data' => [],
                     'success' => false,
-                    'message' => 'Permission not found'
+                    'message' => 'Permission denied'
                 ]);
             }
         } catch (\Throwable $th) {
@@ -177,6 +252,20 @@ class PermissionController extends Controller
             ]);
         }
     }
+
+    /*
+    *    @Permission update
+    *    @bodyParam permission_id int required The id of the permission. Example: 1
+    *    @bodyParam name string required The name of the permission. Example: create user
+    *    @response 200 {
+    *    "success": true,
+    *    "message": "Permission updated successfully"
+    *    }
+    *    @ response 401 {
+    *    "success": false,
+    *    "message": "Permission not found"
+    *    }
+    */
 
     public function permissionUpdate(Request $request)
     {
@@ -189,14 +278,73 @@ class PermissionController extends Controller
         }
         $permission = Permission::findOrFail($request->permission_id);
         try {
-            $permission->name = $request->input('name');
-            $permission->guard_name = 'web';
-            $permission->save();
+            if(Auth::user()->hasPermissionTo('Permission update')){ 
+                $permission->name = $request->input('name');
+                $permission->guard_name = 'web';
+                $permission->save();
 
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Permission updated successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Permission denied'
+                ]);
+            }
+        } catch (\Throwable $th) {
             return response()->json([
-                'success' => true,
-                'message' => 'Permission updated successfully'
+                'success' => false,
+                'message' => 'Something went wrong'
             ]);
+        }
+    }
+
+     /*
+    *  @role delete
+    *  @param role_id
+    *  @response 200 {
+    *   "data": {
+    *        "id": 5,
+    *        "guard_name": "web",
+    *        "name": "EMPLOYEE",
+    *        "updated_at": "2023-06-20T11:01:06.000000Z",
+    *        "created_at": "2023-06-20T11:01:06.000000Z",
+    *    },
+    *   "success": true,
+    *   "message": "Role deleted successfully",
+    *  }
+    * @response 401 {
+    *   "status": false,
+    *   "statusCode": 401,
+    *   "message": "The name has already been taken."
+    *  }
+    */
+
+    public function permissionDelete()
+    {
+        $validator = Validator::make($request->all(), [
+            'permission_id' => 'required|numeric|exists:permissions,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
+        $permission = Permission::findOrFail($request->permission_id);
+        try {
+            if(Auth::user()->hasPermissionTo('Permission delete')){ 
+                $permission->delete();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Permission deleted successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Permission denied'
+                ]);
+            }
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,

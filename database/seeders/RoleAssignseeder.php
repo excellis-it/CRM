@@ -21,6 +21,7 @@ class RoleAssignseeder extends Seeder
 
         $permission = Permission::create(['name' => 'Role list']);
         $permission = Permission::create(['name' => 'Role edit']);
+        $permission = Permission::create(['name' => 'Role update']);
         $permission = Permission::create(['name' => 'Role create']);
         $permission = Permission::create(['name' => 'Role delete']);
 
@@ -30,10 +31,12 @@ class RoleAssignseeder extends Seeder
         $permission = Permission::create(['name' => 'User delete']);
 
         $permission = Permission::create(['name' => 'Permission list']);
+        $permission = Permission::create(['name' => 'Permission list-by-role']);
         $permission = Permission::create(['name' => 'Permission edit']);
+        $permission = Permission::create(['name' => 'Permission update']);
         $permission = Permission::create(['name' => 'Permission create']);
         $permission = Permission::create(['name' => 'Permission delete']);
-
+        $permission = Permission::create(['name' => 'Permission assign']);
         $adminRole->givePermissionTo(Permission::all());
 
         $managerRole->givePermissionTo([

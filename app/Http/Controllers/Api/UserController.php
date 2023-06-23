@@ -167,4 +167,63 @@ class UserController extends Controller
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
         }
     }
+
+    /*
+    *  @user edit
+    *  @response 200 {
+    *    "data": {
+    *        "id": 2,
+    *        "name": "Swarna Manager",
+    *        "email": "swarna@gmail.com",
+    *        "email_verified_at": null,
+    *        "status": 1,
+    *        "created_at": "2023-06-23T08:57:28.000000Z",
+    *        "updated_at": "2023-06-23T08:57:28.000000Z"
+    *    },
+    *    "status": true,
+    *    "statusCode": 200,
+    *    "message": "User details found successfully"
+    * },
+    */
+
+    public function userEdit(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_type' => 'required|exists:roles,name',
+            'user_id' => 'required|exists:users,id'
+        ]);
+
+        if ($validator->fails()) {
+            $errors['message'] = [];
+            $data = explode(',', $validator->errors());
+
+            for ($i = 0; $i < count($validator->errors()); $i++) {
+                // return $data[$i];
+                $dk = explode('["', $data[$i]);
+                $ck = explode('"]', $dk[1]);
+                $errors['message'][$i] = $ck[0];
+            }
+            return response()->json(['status' => false, 'statusCode' => 401,'error' => $errors], 401);
+        }
+        try {
+            if(Auth::user()->hasPermissionTo('User edit')){
+                $user_details = User::where('id', $request->user_id)->role($request->user_type)->first();
+                if ($user_details) {
+                    return response()->json(['data' => $user_details ,'status' => true, 'statusCode' => 200, 'message' => 'User details found successfully'], 200);
+                }else{
+                    return response()->json(['status' => false, 'statusCode' => 401, 'message' => 'User not found'], 401);
+                }
+            }else{
+                return response()->json(['status' => false, 'statusCode' => 401, 'message' => 'You have not permission to view user details'], 401);
+            }    
+        }catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+        }
+    }
+
+    public function userUpdate(Request $request)
+    {
+             
+
+    }
 }

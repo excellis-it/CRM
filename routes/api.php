@@ -43,7 +43,9 @@ Route::group(['prefix' => 'v1'], function () {
     });
 
     Route::group(['prefix' => 'users','middleware' => 'auth:api'], function () {
-        Route::get('list', [UserController::class, 'userList']);  // list api
+        Route::post('list', [UserController::class, 'userList']);  // list api
         Route::post('create', [UserController::class, 'userCreate']);  // create api
+        Route::post('edit', [UserController::class, 'userEdit']);  // edit api
+        Route::post('update', [UserController::class, 'userUpdate']);  // edit api                              
     });
 });
