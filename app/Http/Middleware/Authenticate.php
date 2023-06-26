@@ -28,4 +28,15 @@ class Authenticate extends Middleware
                 'message' => 'UnAuthenticated',
             ], 401));
     }
+
+    public function permissionDenied($request)
+    {
+        abort(response()->json(
+            [
+                'result' => $request,
+                'status' => false,
+                'code' => 403,
+                'message' => 'Permission Denied',
+            ], 403));
+    }
 }

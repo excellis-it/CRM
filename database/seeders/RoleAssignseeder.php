@@ -41,6 +41,7 @@ class RoleAssignseeder extends Seeder
 
         $managerRole->givePermissionTo([
             'User list',
+            'Permission list',
         ]);
     }
 }

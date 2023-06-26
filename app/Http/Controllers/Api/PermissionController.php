@@ -13,13 +13,7 @@ use Spatie\Permission\Models\Permission;
  */
 class PermissionController extends Controller
 {
-    function __construct()
-    {
-        // $this->middleware('permission:Permission list|Permission create|Permission edit|Permission delete', ['only' => ['permissionList']]);
-        // $this->middleware('permission:Permission create', ['only' => ['permissionCreate']]);
-        // $this->middleware('permission:Permission edit', ['only' => ['roleEdit','roleUpdate']]);
-        // $this->middleware('permission:Permission delete', ['only' => ['roleDelete']]);
-    }
+   
     /**
      * Permission list
      * @response 200 {
@@ -47,7 +41,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::latest()->get();
         try {
-            if(Auth::user()->hasPermissionTo('Permission list')){   
+            
                 $count = $permission->count();
                 if ($count > 0) {
                     return response()->json([
@@ -62,13 +56,7 @@ class PermissionController extends Controller
                         'message' => 'Permission list empty'
                     ]);
                 }
-            }else{
-                return response()->json([
-                    'data' => [],
-                    'success' => false,
-                    'message' => 'Permission denied'
-                ]);
-            }
+            
         } catch (\Throwable $th) {
             return response()->json([
                 'data' => [],

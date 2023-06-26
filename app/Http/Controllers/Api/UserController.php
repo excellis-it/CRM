@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\DB;
+
 /**
  *  @user list
  */

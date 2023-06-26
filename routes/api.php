@@ -25,27 +25,30 @@ use App\Http\Controllers\Api\UserController;
 
 Route::group(['prefix' => 'v1'], function () {
     Route::post('login', [AuthController::class, 'login']);  // login api
-    Route::group(['prefix' => 'roles','middleware' => 'auth:api'], function () {
-        Route::post('list',[RoleController::class,'roleList']); // listing api
-        Route::post('create',[RoleController::class,'roleCreate']); // create api
-        Route::post('edit',[RoleController::class,'roleEdit']); // edit api
-        Route::post('update',[RoleController::class,'roleUpdate']); // update api
-        Route::post('delete',[RoleController::class,'roleDelete']); // delete api
-        Route::post('assign-permission',[RoleController::class,'assignPermission']); // assign permission api
-    });
-    Route::group(['prefix' => 'permissions','middleware' => 'auth:api'], function () {
-        Route::post('list',[PermissionController::class,'permissionList']); // listing api
-        Route::post('list-by-role',[PermissionController::class,'permissionsByRole']); // listing by role api
-        Route::post('create',[PermissionController::class,'permissionCreate']); // create api
-        Route::post('edit',[PermissionController::class,'permissionEdit']); // edit api
-        Route::post('update',[PermissionController::class,'permissionUpdate']); // update api
-        Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
-    });
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::group(['prefix' => 'roles'], function () {
+            Route::post('list',[RoleController::class,'roleList']); // listing api
+            Route::post('create',[RoleController::class,'roleCreate']); // create api
+            Route::post('edit',[RoleController::class,'roleEdit']); // edit api
+            Route::post('update',[RoleController::class,'roleUpdate']); // update api
+            Route::post('delete',[RoleController::class,'roleDelete']); // delete api
+            Route::post('assign-permission',[RoleController::class,'assignPermission']); // assign permission api
+        });
 
-    Route::group(['prefix' => 'users','middleware' => 'auth:api'], function () {
-        Route::post('list', [UserController::class, 'userList']);  // list api
-        Route::post('create', [UserController::class, 'userCreate']);  // create api
-        Route::post('edit', [UserController::class, 'userEdit']);  // edit api
-        Route::post('update', [UserController::class, 'userUpdate']);  // edit api                              
-    });
+        Route::group(['prefix' => 'permissions'], function () {
+            Route::post('list',[PermissionController::class,'permissionList']); // listing api
+            Route::post('list-by-role',[PermissionController::class,'permissionsByRole']); // listing by role api
+            Route::post('create',[PermissionController::class,'permissionCreate']); // create api
+            Route::post('edit',[PermissionController::class,'permissionEdit']); // edit api
+            Route::post('update',[PermissionController::class,'permissionUpdate']); // update api
+            Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
+        });
+
+        Route::group(['prefix' => 'users'], function () {
+            Route::post('list', [UserController::class, 'userList']);  // list api
+            Route::post('create', [UserController::class, 'userCreate']);  // create api
+            Route::post('edit', [UserController::class, 'userEdit']);  // edit api
+            Route::post('update', [UserController::class, 'userUpdate']);  // edit api                                
+        });
+    });    
 });
