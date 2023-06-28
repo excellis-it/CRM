@@ -41,7 +41,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::latest()->get();
         try {
-            
+            if(Auth::user()->hasPermissionTo('Permission list')){
                 $count = $permission->count();
                 if ($count > 0) {
                     return response()->json([
@@ -56,6 +56,14 @@ class PermissionController extends Controller
                         'message' => 'Permission list empty'
                     ]);
                 }
+
+            }else{
+                return response()->json([
+                    'statusCode' => 401,
+                    'success' => false,
+                    'message' => 'Permission denied'
+                ]);
+            }    
             
         } catch (\Throwable $th) {
             return response()->json([

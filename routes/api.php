@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ProjectController;
 
 
 /*
@@ -49,6 +50,16 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('create', [UserController::class, 'userCreate']);  // create api
             Route::post('edit', [UserController::class, 'userEdit']);  // edit api
             Route::post('update', [UserController::class, 'userUpdate']);  // edit api                                
+        });
+
+        Route::group(['prefix' => 'projects'], function () {
+            Route::post('list',[ProjectController::class,'projectList']); // listing api
+            // Route::post('list-by-user',[PermissionController::class,'permissionsByRole']); // listing by role api
+            Route::post('create',[ProjectController::class,'projectCreate']); // create api
+            Route::post('edit',[ProjectController::class,'projectEdit']); // edit api
+            Route::post('assign-project',[ProjectController::class,'assignProject']); // assign project api
+            // Route::post('update',[PermissionController::class,'permissionUpdate']); // update api
+            // Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
         });
     });    
 });

@@ -11,20 +11,15 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
-    //
 
-    public function __construct() {    
-        $this->middleware('auth', ['only' => ['roleList']]);
-    }
-
-    // function __construct()
-    // {
-        //  $this->middleware('permission:Role list', ['only' => ['roleList']]);
+    function __construct()
+    {
+         $this->middleware('permission:Role list', ['only' => ['roleList']]);
         //  $this->middleware('permission:Role create', ['only' => ['roleCreate']]);
         //  $this->middleware('permission:Role edit', ['only' => ['roleEdit','roleUpdate']]);
         //  $this->middleware('permission:Role delete', ['only' => ['roleDelete']]);
         //  $this->middleware('permission:Permission assign', ['only' => ['assignPermission']]);
-    // }
+    }
 
     /* 
     *  @role list
@@ -65,7 +60,7 @@ class RoleController extends Controller
 
     public function roleList()
     {
-        if(Auth::user()->hasPermissionTo('Role list')){
+        // if(Auth::user()->hasPermissionTo('Role list')){
             $role= Role::latest()->get();
             try {
                 $count = $role->count();
@@ -89,13 +84,13 @@ class RoleController extends Controller
                     'message' => 'Something went wrong'
                 ]);
             }
-        }else{
-            return response()->json([
-                'data' => [],
-                'success' => false,
-                'message' => 'You have not permission to access'
-            ]);
-        }
+        // }else{
+        //     return response()->json([
+        //         'data' => [],
+        //         'success' => false,
+        //         'message' => 'You have not permission to access'
+        //     ]);
+        // }
      
         
     }

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
+
 class Authenticate extends Middleware
 {
     /**
@@ -12,12 +13,12 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
-    {
-        if (! $request->expectsJson()) {
-            return route('login');
-        }
-    }
+    // protected function redirectTo($request)
+    // {
+    //     if (! $request->expectsJson()) {
+    //         return route('login');
+    //     }
+    // }
 
     protected function unauthenticated($request, array $guards)
     {
@@ -29,14 +30,19 @@ class Authenticate extends Middleware
             ], 401));
     }
 
-    public function permissionDenied($request)
+    protected function permissionDenied($request)
     {
         abort(response()->json(
             [
-                'result' => $request,
                 'status' => false,
-                'code' => 403,
+                'code' => 401,
                 'message' => 'Permission Denied',
-            ], 403));
+            ], 401));
+        // $routeName = Request::route()->getName();
+        // $permission = $user->permissions()->where('route_name', $routeName)->first();
+        // if ( !empty($permission)){
+        //     return redirect()->back();                        
+        // }
+        // return $next($request);
     }
 }
