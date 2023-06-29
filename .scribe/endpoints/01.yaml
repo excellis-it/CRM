@@ -1,0 +1,280 @@
+name: 'Permission management'
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/permissions/list
+    metadata:
+      groupName: 'Permission management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Permission list'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "data": [
+          {
+          "id": 1,
+          "name": "create user",
+          "guard_name": "web",
+          "created_at": "2021-01-01T00:00:00.000000Z",
+          "updated_at": "2021-01-01T00:00:00.000000Z"
+          },
+          },
+          "success": true,
+          "message": "Permission list successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 401
+        content: |-
+          {
+          "data": [],
+          "success": false,
+          "message": "Permission list empty"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/permissions/list-by-role
+    metadata:
+      groupName: 'Permission management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      role_id:
+        name: role_id
+        description: ''
+        required: true
+        example: 169365717.49696
+        type: number
+        custom: []
+    cleanBodyParameters:
+      role_id: 169365717.49696
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/permissions/create
+    metadata:
+      groupName: 'Permission management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Permission create'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the permission.'
+        required: true
+        example: 'create permission'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: 'create permission'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "success": true,
+          "message": "Permission created successfully"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+          "success": false,
+          "message": "Something went wrong"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/permissions/edit
+    metadata:
+      groupName: 'Permission management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      permission_id:
+        name: permission_id
+        description: ''
+        required: true
+        example: 8.6565
+        type: number
+        custom: []
+    cleanBodyParameters:
+      permission_id: 8.6565
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/permissions/update
+    metadata:
+      groupName: 'Permission management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      permission_id:
+        name: permission_id
+        description: ''
+        required: true
+        example: 561641.7512
+        type: number
+        custom: []
+      name:
+        name: name
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
+    cleanBodyParameters:
+      permission_id: 561641.7512
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/permissions/delete
+    metadata:
+      groupName: 'Permission management'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      permission_id:
+        name: permission_id
+        description: ''
+        required: true
+        example: 0.499
+        type: number
+        custom: []
+    cleanBodyParameters:
+      permission_id: 0.499
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

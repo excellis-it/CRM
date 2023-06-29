@@ -1,0 +1,642 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/login:
+    post:
+      summary: 'Login Api'
+      operationId: loginApi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: true
+                  statusCode: 200
+                  message: 'Login successfully.'
+                  data:
+                    user:
+                      id: 1
+                      name: 'John Doe'
+                      email: johh@yopmail.com
+                      status: 1
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: 'Login successfully.'
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: johh@yopmail.com
+                          status:
+                            type: integer
+                            example: 1
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No detail found!'
+                  status: false
+                properties:
+                  message:
+                    type: string
+                    example: 'No detail found!'
+                  status:
+                    type: boolean
+                    example: false
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'email, must be unique.'
+                  example: ngleichner@example.org
+                password:
+                  type: string
+                  description: 'password, must be 8 character long.'
+                  example: 'ZuBiaF%''YPW7AjS\5'
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/roles/list:
+    post:
+      summary: ''
+      operationId: postApiV1RolesList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/roles/create:
+    post:
+      summary: ''
+      operationId: postApiV1RolesCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: rerum
+              required:
+                - name
+      security: []
+  /api/v1/roles/edit:
+    post:
+      summary: ''
+      operationId: postApiV1RolesEdit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 43462.95424
+              required:
+                - role_id
+      security: []
+  /api/v1/roles/update:
+    post:
+      summary: ''
+      operationId: postApiV1RolesUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: string
+                  description: ''
+                  example: consequatur
+                name:
+                  type: string
+                  description: ''
+                  example: dolores
+              required:
+                - role_id
+                - name
+      security: []
+  /api/v1/roles/delete:
+    post:
+      summary: ''
+      operationId: postApiV1RolesDelete
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 54.1742824
+              required:
+                - role_id
+      security: []
+  /api/v1/roles/assign-permission:
+    post:
+      summary: ''
+      operationId: postApiV1RolesAssignPermission
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 1971.224573078
+                permission_id:
+                  type: string
+                  description: ''
+                  example: rerum
+              required:
+                - role_id
+                - permission_id
+      security: []
+  /api/v1/users/list:
+    post:
+      summary: ''
+      operationId: postApiV1UsersList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/users/create:
+    post:
+      summary: ''
+      operationId: postApiV1UsersCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: debitis
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
+                  example: 5.4.s.e.n@g.9.p.h.elztt$/ix
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: "Kb;'S)wFJgT>}A~#"
+                user_type:
+                  type: string
+                  description: ''
+                  example: officiis
+              required:
+                - name
+                - email
+                - password
+                - user_type
+      security: []
+  /api/v1/users/edit:
+    post:
+      summary: ''
+      operationId: postApiV1UsersEdit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_type:
+                  type: string
+                  description: ''
+                  example: a
+                user_id:
+                  type: string
+                  description: ''
+                  example: similique
+              required:
+                - user_type
+                - user_id
+      security: []
+  /api/v1/permissions/list:
+    post:
+      summary: 'Permission list'
+      operationId: permissionList
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n\"data\": [\n{\n\"id\": 1,\n\"name\": \"create user\",\n\"guard_name\": \"web\",\n\"created_at\": \"2021-01-01T00:00:00.000000Z\",\n\"updated_at\": \"2021-01-01T00:00:00.000000Z\"\n},\n},\n\"success\": true,\n\"message\": \"Permission list successfully\"\n}"
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: []
+                  success: false
+                  message: 'Permission list empty'
+                properties:
+                  data:
+                    type: array
+                    example: []
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Permission list empty'
+      tags:
+        - 'Permission management'
+      security: []
+  /api/v1/permissions/list-by-role:
+    post:
+      summary: ''
+      operationId: postApiV1PermissionsListByRole
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Permission management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 169365717.49696
+              required:
+                - role_id
+      security: []
+  /api/v1/permissions/create:
+    post:
+      summary: 'Permission create'
+      operationId: permissionCreate
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Something went wrong'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Something went wrong'
+      tags:
+        - 'Permission management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the permission.'
+                  example: 'create permission'
+              required:
+                - name
+      security: []
+  /api/v1/permissions/edit:
+    post:
+      summary: ''
+      operationId: postApiV1PermissionsEdit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Permission management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permission_id:
+                  type: number
+                  description: ''
+                  example: 8.6565
+              required:
+                - permission_id
+      security: []
+  /api/v1/permissions/update:
+    post:
+      summary: ''
+      operationId: postApiV1PermissionsUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Permission management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permission_id:
+                  type: number
+                  description: ''
+                  example: 561641.7512
+                name:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - permission_id
+      security: []
+  /api/v1/permissions/delete:
+    post:
+      summary: ''
+      operationId: postApiV1PermissionsDelete
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Permission management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permission_id:
+                  type: number
+                  description: ''
+                  example: 0.499
+              required:
+                - permission_id
+      security: []
+  /api/v1/projects/list:
+    post:
+      summary: ''
+      operationId: postApiV1ProjectsList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Project APIs'
+      security: []
+  /api/v1/projects/create:
+    post:
+      summary: ''
+      operationId: postApiV1ProjectsCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Project APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: corporis
+                description:
+                  type: string
+                  description: ''
+                  example: ullam
+                project_type:
+                  type: string
+                  description: ''
+                  example: sit
+                start_date:
+                  type: string
+                  description: ''
+                  example: magnam
+                end_date:
+                  type: string
+                  description: ''
+                  example: ut
+              required:
+                - title
+                - description
+                - project_type
+                - start_date
+                - end_date
+      security: []
+  /api/v1/projects/edit:
+    post:
+      summary: ''
+      operationId: postApiV1ProjectsEdit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Project APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: string
+                  description: ''
+                  example: saepe
+              required:
+                - project_id
+      security: []
+  /api/v1/projects/assign-project:
+    post:
+      summary: ''
+      operationId: postApiV1ProjectsAssignProject
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Project APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: string
+                  description: ''
+                  example: tenetur
+                user_id:
+                  type: string
+                  description: ''
+                  example: reiciendis
+              required:
+                - project_id
+                - user_id
+      security: []
+  /api/v1/projects/update:
+    post:
+      summary: ''
+      operationId: postApiV1ProjectsUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Project APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: string
+                  description: ''
+                  example: consequatur
+                title:
+                  type: string
+                  description: ''
+                  example: ducimus
+                description:
+                  type: string
+                  description: ''
+                  example: soluta
+                project_type:
+                  type: string
+                  description: ''
+                  example: a
+                start_date:
+                  type: string
+                  description: ''
+                  example: ratione
+                end_date:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - project_id
+                - title
+                - description
+                - project_type
+                - start_date
+                - end_date
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: 'Permission management'
+    description: ''
+  -
+    name: 'Project APIs'
+    description: "\nAPIs for Projects"
