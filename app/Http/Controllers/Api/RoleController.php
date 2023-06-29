@@ -14,11 +14,11 @@ class RoleController extends Controller
 
     function __construct()
     {
-         $this->middleware('permission:Role list', ['only' => ['roleList']]);
-        //  $this->middleware('permission:Role create', ['only' => ['roleCreate']]);
-        //  $this->middleware('permission:Role edit', ['only' => ['roleEdit','roleUpdate']]);
-        //  $this->middleware('permission:Role delete', ['only' => ['roleDelete']]);
-        //  $this->middleware('permission:Permission assign', ['only' => ['assignPermission']]);
+        $this->middleware('permission:Role list', ['only' => ['roleList']]);
+         $this->middleware('permission:Role create', ['only' => ['roleCreate']]);
+         $this->middleware('permission:Role edit', ['only' => ['roleEdit','roleUpdate']]);
+         $this->middleware('permission:Role delete', ['only' => ['roleDelete']]);
+         $this->middleware('permission:Permission assign', ['only' => ['assignPermission']]);
     }
 
     /* 
@@ -60,39 +60,29 @@ class RoleController extends Controller
 
     public function roleList()
     {
-        // if(Auth::user()->hasPermissionTo('Role list')){
-            $role= Role::latest()->get();
-            try {
-                $count = $role->count();
-                if($count > 0){
-                    return response()->json([
-                        'data' => $role,
-                        'success' => true,
-                        'message' => 'Role list successfully'
-                    ]);
-                }else{
-                    return response()->json([
-                        'data' => [],
-                        'success' => false,
-                        'message' => 'Role list empty'
-                    ]);
-                }
-            } catch (\Throwable $th) {
+        $role= Role::latest()->get();
+        try {
+            $count = $role->count();
+            if($count > 0){
+                return response()->json([
+                    'data' => $role,
+                    'success' => true,
+                    'message' => 'Role list successfully'
+                ]);
+            }else{
                 return response()->json([
                     'data' => [],
                     'success' => false,
-                    'message' => 'Something went wrong'
+                    'message' => 'Role list empty'
                 ]);
             }
-        // }else{
-        //     return response()->json([
-        //         'data' => [],
-        //         'success' => false,
-        //         'message' => 'You have not permission to access'
-        //     ]);
-        // }
-     
-        
+        } catch (\Throwable $th) {
+            return response()->json([
+                'data' => [],
+                'success' => false,
+                'message' => 'Something went wrong'
+            ]);
+        }
     }
 
     /*
@@ -124,24 +114,16 @@ class RoleController extends Controller
         }
     
         try {
-            if(Auth::user()->hasPermissionTo('Role create')){
-                $role = new Role;
-                $role->name = $request->input('name');
-                $role->guard_name = 'web';
-                $role->save();
-            
-                return response()->json([
-                    'data' => $role,
-                    'success' => true,
-                    'message' => 'Role created successfully'
-                ]);
-            }else{
-                return response()->json([
-                    'data' => [],
-                    'success' => false,
-                    'message' => 'You have not permission to access'
-                ]);
-            }
+            $role = new Role;
+            $role->name = $request->input('name');
+            $role->guard_name = 'web';
+            $role->save();
+        
+            return response()->json([
+                'data' => $role,
+                'success' => true,
+                'message' => 'Role created successfully'
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
@@ -180,20 +162,12 @@ class RoleController extends Controller
             return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
         }
         try {
-            if(Auth::user()->hasPermissionTo('Role edit')){
-                $role = Role::where('id', $request->role_id)->first();
-                return response()->json([
-                    'data' => $role,
-                    'success' => true,
-                    'message' => 'Role detail find successfully'
-                ]);
-            }else{
-                return response()->json([
-                    'data' => [],
-                    'success' => false,
-                    'message' => 'You have not permission to access'
-                ]);
-            }
+            $role = Role::where('id', $request->role_id)->first();
+            return response()->json([
+                'data' => $role,
+                'success' => true,
+                'message' => 'Role detail find successfully'
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
@@ -244,24 +218,16 @@ class RoleController extends Controller
         }
         
         try {
-            if(Auth::user()->hasPermissionTo('Role update')){
-                $check_role = Role::where('id', $request->role_id)->first();
-                $check_role->name = $request->name;
-                $check_role->guard_name = 'web';
-                $check_role->update();
-                
-                return response()->json([
-                    'data' => $check_role,
-                    'success' => true,
-                    'message' => 'Role updated successfully'
-                ]);
-            }else{
-                return response()->json([
-                    'data' => [],
-                    'success' => false,
-                    'message' => 'You have not permission to access'
-                ]);
-            }
+            $check_role = Role::where('id', $request->role_id)->first();
+            $check_role->name = $request->name;
+            $check_role->guard_name = 'web';
+            $check_role->update();
+            
+            return response()->json([
+                'data' => $check_role,
+                'success' => true,
+                'message' => 'Role updated successfully'
+            ]);  
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
@@ -301,22 +267,14 @@ class RoleController extends Controller
         }
         
         try {
-            if(Auth::user()->hasPermissionTo('Role update')){
-                $role = Role::where('id', $request->role_id)->first();
-                $role->delete();
-                
-                return response()->json([
-                    'data' => $role,
-                    'success' => true,
-                    'message' => 'Role deleted successfully'
-                ]);
-            }else{
-                return response()->json([
-                    'data' => [],
-                    'success' => false,
-                    'message' => 'You have not permission to access'
-                ]);
-            }
+            $role = Role::where('id', $request->role_id)->first();
+            $role->delete();
+            
+            return response()->json([
+                'data' => $role,
+                'success' => true,
+                'message' => 'Role deleted successfully'
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
@@ -380,25 +338,16 @@ class RoleController extends Controller
         }
 
         try {
-            if(Auth::user()->hasPermissionTo('Permission assign')){
-                $role = Role::where('id', $request->role_id)->first();
-                $role->givePermissionTo([
-                    $request->permission_id
-                ]);
-                
-                return response()->json([
-                    'data' => $role,
-                    'success' => true,
-                    'message' => 'Permission assign successfully'
-                ]);
-            }else{
-                return response()->json([
-                    'data' => [],
-                    'success' => false,
-                    'message' => 'You have not permission to access'
-                ]);
-            }
+            $role = Role::where('id', $request->role_id)->first();
+            $role->givePermissionTo([
+                $request->permission_id
+            ]);
             
+            return response()->json([
+                'data' => $role,
+                'success' => true,
+                'message' => 'Permission assign successfully'
+            ]);   
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,

@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('project_type')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
+            $table->tinyInteger('status')->default(true);
             $table->timestamps();
         });
     }

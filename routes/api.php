@@ -54,11 +54,10 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::group(['prefix' => 'projects'], function () {
             Route::post('list',[ProjectController::class,'projectList']); // listing api
-            // Route::post('list-by-user',[PermissionController::class,'permissionsByRole']); // listing by role api
             Route::post('create',[ProjectController::class,'projectCreate']); // create api
             Route::post('edit',[ProjectController::class,'projectEdit']); // edit api
             Route::post('assign-project',[ProjectController::class,'assignProject']); // assign project api
-            // Route::post('update',[PermissionController::class,'permissionUpdate']); // update api
+            Route::post('update',[ProjectController::class,'projectUpdate']); // update api
             // Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
         });
     });    

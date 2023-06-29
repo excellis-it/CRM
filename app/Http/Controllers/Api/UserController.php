@@ -206,24 +206,15 @@ class UserController extends Controller
             return response()->json(['status' => false, 'statusCode' => 401,'error' => $errors], 401);
         }
         try {
-            if(Auth::user()->hasPermissionTo('User edit')){
-                $user_details = User::where('id', $request->user_id)->role($request->user_type)->first();
-                if ($user_details) {
-                    return response()->json(['data' => $user_details ,'status' => true, 'statusCode' => 200, 'message' => 'User details found successfully'], 200);
-                }else{
-                    return response()->json(['status' => false, 'statusCode' => 401, 'message' => 'User not found'], 401);
-                }
+            $user_details = User::where('id', $request->user_id)->role($request->user_type)->first();
+            if ($user_details) {
+                return response()->json(['data' => $user_details ,'status' => true, 'statusCode' => 200, 'message' => 'User details found successfully'], 200);
             }else{
-                return response()->json(['status' => false, 'statusCode' => 401, 'message' => 'You have not permission to view user details'], 401);
-            }    
+                return response()->json(['status' => false, 'statusCode' => 401, 'message' => 'User not found'], 401);
+            } 
         }catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
         }
     }
 
-    public function userUpdate(Request $request)
-    {
-             
-
-    }
 }
