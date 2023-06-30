@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TaskController;
 
 
 /*
@@ -59,6 +60,15 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('assign-project',[ProjectController::class,'assignProject']); // assign project api
             Route::post('update',[ProjectController::class,'projectUpdate']); // update api
             // Route::post('delete',[PermissionController::class,'permissionDelete']); // delete api
+        });
+
+        Route::group(['prefix' => 'tasks'], function () {
+            Route::post('list-by-project',[TaskController::class,'taskListByProject']); // listing api
+            Route::post('create',[TaskController::class,'taskCreate']); // create api
+            Route::post('edit',[TaskController::class,'taskEdit']); // edit api
+            Route::post('assign-task',[TaskController::class,'assignTask']); // assign project api
+            Route::post('update',[TaskController::class,'taskUpdate']); // update api
+            Route::post('delete',[TaskController::class,'taskDelete']); // delete api
         });
     });    
 });

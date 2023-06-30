@@ -1,17 +1,17 @@
-name: 'Roles  APIs'
+name: 'Project APIs'
 description: |-
 
-  APIs for Roles management
+  APIs for Projects
 endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/roles/list
+    uri: api/v1/projects/list
     metadata:
-      groupName: 'Roles  APIs'
+      groupName: 'Project APIs'
       groupDescription: |-
 
-        APIs for Roles management
+        APIs for Projects
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -38,12 +38,12 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/roles/create
+    uri: api/v1/projects/create
     metadata:
-      groupName: 'Roles  APIs'
+      groupName: 'Project APIs'
       groupDescription: |-
 
-        APIs for Roles management
+        APIs for Projects
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -58,15 +58,47 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      name:
-        name: name
+      title:
+        name: title
         description: ''
         required: true
-        example: ad
+        example: vel
+        type: string
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: true
+        example: quis
+        type: string
+        custom: []
+      project_type:
+        name: project_type
+        description: ''
+        required: true
+        example: quibusdam
+        type: string
+        custom: []
+      start_date:
+        name: start_date
+        description: ''
+        required: true
+        example: iusto
+        type: string
+        custom: []
+      end_date:
+        name: end_date
+        description: ''
+        required: true
+        example: possimus
         type: string
         custom: []
     cleanBodyParameters:
-      name: ad
+      title: vel
+      description: quis
+      project_type: quibusdam
+      start_date: iusto
+      end_date: possimus
     fileParameters: []
     responses: []
     responseFields: []
@@ -78,12 +110,12 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/roles/edit
+    uri: api/v1/projects/edit
     metadata:
-      groupName: 'Roles  APIs'
+      groupName: 'Project APIs'
       groupDescription: |-
 
-        APIs for Roles management
+        APIs for Projects
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -98,15 +130,15 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      role_id:
-        name: role_id
+      project_id:
+        name: project_id
         description: ''
         required: true
-        example: 220891284.46239
-        type: number
+        example: tempora
+        type: string
         custom: []
     cleanBodyParameters:
-      role_id: 220891284.46239
+      project_id: tempora
     fileParameters: []
     responses: []
     responseFields: []
@@ -118,12 +150,12 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/roles/update
+    uri: api/v1/projects/assign-project
     metadata:
-      groupName: 'Roles  APIs'
+      groupName: 'Project APIs'
       groupDescription: |-
 
-        APIs for Roles management
+        APIs for Projects
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -138,23 +170,23 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      role_id:
-        name: role_id
+      project_id:
+        name: project_id
         description: ''
         required: true
-        example: qui
+        example: recusandae
         type: string
         custom: []
-      name:
-        name: name
+      user_id:
+        name: user_id
         description: ''
         required: true
-        example: totam
+        example: quibusdam
         type: string
         custom: []
     cleanBodyParameters:
-      role_id: qui
-      name: totam
+      project_id: recusandae
+      user_id: quibusdam
     fileParameters: []
     responses: []
     responseFields: []
@@ -166,12 +198,12 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/roles/delete
+    uri: api/v1/projects/update
     metadata:
-      groupName: 'Roles  APIs'
+      groupName: 'Project APIs'
       groupDescription: |-
 
-        APIs for Roles management
+        APIs for Projects
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -186,63 +218,55 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      role_id:
-        name: role_id
+      project_id:
+        name: project_id
         description: ''
         required: true
-        example: 34169.27949226
-        type: number
+        example: asperiores
+        type: string
         custom: []
-    cleanBodyParameters:
-      role_id: 34169.27949226
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-    custom: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/roles/assign-permission
-    metadata:
-      groupName: 'Roles  APIs'
-      groupDescription: |-
-
-        APIs for Roles management
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      custom: []
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      role_id:
-        name: role_id
+      title:
+        name: title
         description: ''
         required: true
-        example: 3483.7933
-        type: number
+        example: odio
+        type: string
         custom: []
-      permission_id:
-        name: permission_id
+      description:
+        name: description
         description: ''
         required: true
-        example: omnis
+        example: quam
+        type: string
+        custom: []
+      project_type:
+        name: project_type
+        description: ''
+        required: true
+        example: expedita
+        type: string
+        custom: []
+      start_date:
+        name: start_date
+        description: ''
+        required: true
+        example: beatae
+        type: string
+        custom: []
+      end_date:
+        name: end_date
+        description: ''
+        required: true
+        example: ipsum
         type: string
         custom: []
     cleanBodyParameters:
-      role_id: 3483.7933
-      permission_id: omnis
+      project_id: asperiores
+      title: odio
+      description: quam
+      project_type: expedita
+      start_date: beatae
+      end_date: ipsum
     fileParameters: []
     responses: []
     responseFields: []

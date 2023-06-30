@@ -86,225 +86,14 @@ paths:
                 email:
                   type: string
                   description: 'email, must be unique.'
-                  example: ngleichner@example.org
+                  example: udubuque@example.net
                 password:
                   type: string
                   description: 'password, must be 8 character long.'
-                  example: 'ZuBiaF%''YPW7AjS\5'
+                  example: 'fTnOA#=lj'
               required:
                 - email
                 - password
-      security: []
-  /api/v1/roles/list:
-    post:
-      summary: ''
-      operationId: postApiV1RolesList
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      security: []
-  /api/v1/roles/create:
-    post:
-      summary: ''
-      operationId: postApiV1RolesCreate
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: ''
-                  example: rerum
-              required:
-                - name
-      security: []
-  /api/v1/roles/edit:
-    post:
-      summary: ''
-      operationId: postApiV1RolesEdit
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                role_id:
-                  type: number
-                  description: ''
-                  example: 43462.95424
-              required:
-                - role_id
-      security: []
-  /api/v1/roles/update:
-    post:
-      summary: ''
-      operationId: postApiV1RolesUpdate
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                role_id:
-                  type: string
-                  description: ''
-                  example: consequatur
-                name:
-                  type: string
-                  description: ''
-                  example: dolores
-              required:
-                - role_id
-                - name
-      security: []
-  /api/v1/roles/delete:
-    post:
-      summary: ''
-      operationId: postApiV1RolesDelete
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                role_id:
-                  type: number
-                  description: ''
-                  example: 54.1742824
-              required:
-                - role_id
-      security: []
-  /api/v1/roles/assign-permission:
-    post:
-      summary: ''
-      operationId: postApiV1RolesAssignPermission
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                role_id:
-                  type: number
-                  description: ''
-                  example: 1971.224573078
-                permission_id:
-                  type: string
-                  description: ''
-                  example: rerum
-              required:
-                - role_id
-                - permission_id
-      security: []
-  /api/v1/users/list:
-    post:
-      summary: ''
-      operationId: postApiV1UsersList
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      security: []
-  /api/v1/users/create:
-    post:
-      summary: ''
-      operationId: postApiV1UsersCreate
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: ''
-                  example: debitis
-                email:
-                  type: string
-                  description: 'Must be a valid email address. Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
-                  example: 5.4.s.e.n@g.9.p.h.elztt$/ix
-                password:
-                  type: string
-                  description: 'Must be at least 8 characters.'
-                  example: "Kb;'S)wFJgT>}A~#"
-                user_type:
-                  type: string
-                  description: ''
-                  example: officiis
-              required:
-                - name
-                - email
-                - password
-                - user_type
-      security: []
-  /api/v1/users/edit:
-    post:
-      summary: ''
-      operationId: postApiV1UsersEdit
-      description: ''
-      parameters: []
-      responses: {  }
-      tags:
-        - Endpoints
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user_type:
-                  type: string
-                  description: ''
-                  example: a
-                user_id:
-                  type: string
-                  description: ''
-                  example: similique
-              required:
-                - user_type
-                - user_id
       security: []
   /api/v1/permissions/list:
     post:
@@ -341,7 +130,7 @@ paths:
                     type: string
                     example: 'Permission list empty'
       tags:
-        - 'Permission management'
+        - 'Permission APIs'
       security: []
   /api/v1/permissions/list-by-role:
     post:
@@ -351,7 +140,7 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - 'Permission management'
+        - 'Permission APIs'
       requestBody:
         required: true
         content:
@@ -362,7 +151,7 @@ paths:
                 role_id:
                   type: number
                   description: ''
-                  example: 169365717.49696
+                  example: 708165.5
               required:
                 - role_id
       security: []
@@ -390,7 +179,7 @@ paths:
                     type: string
                     example: 'Something went wrong'
       tags:
-        - 'Permission management'
+        - 'Permission APIs'
       requestBody:
         required: true
         content:
@@ -413,7 +202,7 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - 'Permission management'
+        - 'Permission APIs'
       requestBody:
         required: true
         content:
@@ -424,7 +213,7 @@ paths:
                 permission_id:
                   type: number
                   description: ''
-                  example: 8.6565
+                  example: 578.95
               required:
                 - permission_id
       security: []
@@ -436,7 +225,7 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - 'Permission management'
+        - 'Permission APIs'
       requestBody:
         required: true
         content:
@@ -447,7 +236,7 @@ paths:
                 permission_id:
                   type: number
                   description: ''
-                  example: 561641.7512
+                  example: 1720.216223681
                 name:
                   type: string
                   description: ''
@@ -463,7 +252,7 @@ paths:
       parameters: []
       responses: {  }
       tags:
-        - 'Permission management'
+        - 'Permission APIs'
       requestBody:
         required: true
         content:
@@ -474,7 +263,7 @@ paths:
                 permission_id:
                   type: number
                   description: ''
-                  example: 0.499
+                  example: 715637.70917463
               required:
                 - permission_id
       security: []
@@ -507,23 +296,23 @@ paths:
                 title:
                   type: string
                   description: ''
-                  example: corporis
+                  example: vel
                 description:
                   type: string
                   description: ''
-                  example: ullam
+                  example: quis
                 project_type:
                   type: string
                   description: ''
-                  example: sit
+                  example: quibusdam
                 start_date:
                   type: string
                   description: ''
-                  example: magnam
+                  example: iusto
                 end_date:
                   type: string
                   description: ''
-                  example: ut
+                  example: possimus
               required:
                 - title
                 - description
@@ -550,7 +339,7 @@ paths:
                 project_id:
                   type: string
                   description: ''
-                  example: saepe
+                  example: tempora
               required:
                 - project_id
       security: []
@@ -573,11 +362,11 @@ paths:
                 project_id:
                   type: string
                   description: ''
-                  example: tenetur
+                  example: recusandae
                 user_id:
                   type: string
                   description: ''
-                  example: reiciendis
+                  example: quibusdam
               required:
                 - project_id
                 - user_id
@@ -601,27 +390,27 @@ paths:
                 project_id:
                   type: string
                   description: ''
-                  example: consequatur
+                  example: asperiores
                 title:
                   type: string
                   description: ''
-                  example: ducimus
+                  example: odio
                 description:
                   type: string
                   description: ''
-                  example: soluta
+                  example: quam
                 project_type:
                   type: string
                   description: ''
-                  example: a
+                  example: expedita
                 start_date:
                   type: string
                   description: ''
-                  example: ratione
+                  example: beatae
                 end_date:
                   type: string
                   description: ''
-                  example: et
+                  example: ipsum
               required:
                 - project_id
                 - title
@@ -630,13 +419,230 @@ paths:
                 - start_date
                 - end_date
       security: []
+  /api/v1/roles/list:
+    post:
+      summary: ''
+      operationId: postApiV1RolesList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Roles  APIs'
+      security: []
+  /api/v1/roles/create:
+    post:
+      summary: ''
+      operationId: postApiV1RolesCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Roles  APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: ad
+              required:
+                - name
+      security: []
+  /api/v1/roles/edit:
+    post:
+      summary: ''
+      operationId: postApiV1RolesEdit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Roles  APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 220891284.46239
+              required:
+                - role_id
+      security: []
+  /api/v1/roles/update:
+    post:
+      summary: ''
+      operationId: postApiV1RolesUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Roles  APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: string
+                  description: ''
+                  example: qui
+                name:
+                  type: string
+                  description: ''
+                  example: totam
+              required:
+                - role_id
+                - name
+      security: []
+  /api/v1/roles/delete:
+    post:
+      summary: ''
+      operationId: postApiV1RolesDelete
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Roles  APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 34169.27949226
+              required:
+                - role_id
+      security: []
+  /api/v1/roles/assign-permission:
+    post:
+      summary: ''
+      operationId: postApiV1RolesAssignPermission
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Roles  APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role_id:
+                  type: number
+                  description: ''
+                  example: 3483.7933
+                permission_id:
+                  type: string
+                  description: ''
+                  example: omnis
+              required:
+                - role_id
+                - permission_id
+      security: []
+  /api/v1/users/list:
+    post:
+      summary: ''
+      operationId: postApiV1UsersList
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Users APIs'
+      security: []
+  /api/v1/users/create:
+    post:
+      summary: ''
+      operationId: postApiV1UsersCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Users APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: architecto
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must match the regex /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix.'
+                  example: f@xter.mv83.vim5.xzg3.0z5m.zehpit$/ix
+                password:
+                  type: string
+                  description: 'Must be at least 8 characters.'
+                  example: 'li7w?<2#\N#p&9bY'
+                user_type:
+                  type: string
+                  description: ''
+                  example: atque
+              required:
+                - name
+                - email
+                - password
+                - user_type
+      security: []
+  /api/v1/users/edit:
+    post:
+      summary: ''
+      operationId: postApiV1UsersEdit
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'Users APIs'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_type:
+                  type: string
+                  description: ''
+                  example: animi
+                user_id:
+                  type: string
+                  description: ''
+                  example: enim
+              required:
+                - user_type
+                - user_id
+      security: []
 tags:
   -
     name: Endpoints
     description: ''
   -
-    name: 'Permission management'
-    description: ''
+    name: 'Permission APIs'
+    description: "\nAPIs for Permissions"
   -
     name: 'Project APIs'
     description: "\nAPIs for Projects"
+  -
+    name: 'Roles  APIs'
+    description: "\nAPIs for Roles management"
+  -
+    name: 'Users APIs'
+    description: "\nAPIs for Users management"

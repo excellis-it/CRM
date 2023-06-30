@@ -44,12 +44,28 @@ class RoleAssignseeder extends Seeder
         $permission = Permission::create(['name' => 'Project create']);
         $permission = Permission::create(['name' => 'Project delete']);
         $permission = Permission::create(['name' => 'Project assign']);
+
+        $permission = Permission::create(['name' => 'Task list']);
+        $permission = Permission::create(['name' => 'Task edit']);
+        $permission = Permission::create(['name' => 'Task update']);
+        $permission = Permission::create(['name' => 'Task create']);
+        $permission = Permission::create(['name' => 'Task delete']);
+        $permission = Permission::create(['name' => 'Task assign']);
         
         $adminRole->givePermissionTo(Permission::all());
 
         $managerRole->givePermissionTo([
             'User list',
             'Project list',
+            'Project create',
+            'Project edit',
+            'Project update',
+            'Project assign',
+            'Task create',
+            'Task list',
+            'Task edit',
+            'Task update',
+            'Task assign',
         ]);
     }
 }

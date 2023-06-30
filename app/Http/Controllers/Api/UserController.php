@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 
 /**
- *  @user list
+ * @group Users APIs
+ *
+ * APIs for Users management
  */
 class UserController extends Controller
 {

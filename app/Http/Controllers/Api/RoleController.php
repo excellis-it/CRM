@@ -9,6 +9,12 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 
+/**
+ * @group Roles  APIs
+ *
+ * APIs for Roles management
+ */
+
 class RoleController extends Controller
 {
 

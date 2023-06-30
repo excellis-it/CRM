@@ -19,6 +19,7 @@ class CreateAssignTasksTable extends Migration
             $table->foreignId('emp_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('due_on')->nullable();
             $table->string('notes')->nullable();
+            $table->enum('status',['pending','completed','process'])->default('process');
             $table->timestamps();
         });
     }

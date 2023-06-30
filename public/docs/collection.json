@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "6c80fcb5-8506-4b10-bb0d-5b95b4e1ab59",
+        "_postman_id": "80822a8c-bf15-4215-ae92-4189d8de0b8c",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"ngleichner@example.org\",\"password\":\"ZuBiaF%'YPW7AjS\\\\5\"}"
+                            "raw": "{\"email\":\"udubuque@example.net\",\"password\":\"fTnOA#=lj\"}"
                         },
                         "description": "",
                         "auth": {
@@ -68,285 +68,12 @@
                             "name": ""
                         }
                     ]
-                },
-                {
-                    "name": "POST api\/v1\/roles\/list",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/roles\/list",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/roles\/list"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/roles\/create",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/roles\/create",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/roles\/create"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"rerum\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/roles\/edit",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/roles\/edit",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/roles\/edit"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"role_id\":43462.95424}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/roles\/update",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/roles\/update",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/roles\/update"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"role_id\":\"consequatur\",\"name\":\"dolores\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/roles\/delete",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/roles\/delete",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/roles\/delete"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"role_id\":54.1742824}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/roles\/assign-permission",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/roles\/assign-permission",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/roles\/assign-permission"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"role_id\":1971.224573078,\"permission_id\":\"rerum\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/users\/list",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users\/list",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users\/list"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/users\/create",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users\/create",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users\/create"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"name\":\"debitis\",\"email\":\"5.4.s.e.n@g.9.p.h.elztt$\\\/ix\",\"password\":\"Kb;'S)wFJgT>}A~#\",\"user_type\":\"officiis\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "POST api\/v1\/users\/edit",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "api\/v1\/users\/edit",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/api\/v1\/users\/edit"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"user_type\":\"a\",\"user_id\":\"similique\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
                 }
             ]
         },
         {
-            "name": "Permission management",
-            "description": "",
+            "name": "Permission APIs",
+            "description": "\nAPIs for Permissions",
             "item": [
                 {
                     "name": "Permission list",
@@ -411,7 +138,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"role_id\":169365717.4969637}"
+                            "raw": "{\"role_id\":708165.5}"
                         },
                         "description": "",
                         "auth": {
@@ -486,7 +213,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"permission_id\":8.6565}"
+                            "raw": "{\"permission_id\":578.95}"
                         },
                         "description": "",
                         "auth": {
@@ -517,7 +244,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"permission_id\":561641.7512}"
+                            "raw": "{\"permission_id\":1720.216223681}"
                         },
                         "description": "",
                         "auth": {
@@ -548,7 +275,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"permission_id\":0.499}"
+                            "raw": "{\"permission_id\":715637.70917463}"
                         },
                         "description": "",
                         "auth": {
@@ -613,7 +340,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"title\":\"corporis\",\"description\":\"ullam\",\"project_type\":\"sit\",\"start_date\":\"magnam\",\"end_date\":\"ut\"}"
+                            "raw": "{\"title\":\"vel\",\"description\":\"quis\",\"project_type\":\"quibusdam\",\"start_date\":\"iusto\",\"end_date\":\"possimus\"}"
                         },
                         "description": "",
                         "auth": {
@@ -644,7 +371,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"project_id\":\"saepe\"}"
+                            "raw": "{\"project_id\":\"tempora\"}"
                         },
                         "description": "",
                         "auth": {
@@ -675,7 +402,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"project_id\":\"tenetur\",\"user_id\":\"reiciendis\"}"
+                            "raw": "{\"project_id\":\"recusandae\",\"user_id\":\"quibusdam\"}"
                         },
                         "description": "",
                         "auth": {
@@ -706,7 +433,292 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"project_id\":\"consequatur\",\"title\":\"ducimus\",\"description\":\"soluta\",\"project_type\":\"a\",\"start_date\":\"ratione\",\"end_date\":\"et\"}"
+                            "raw": "{\"project_id\":\"asperiores\",\"title\":\"odio\",\"description\":\"quam\",\"project_type\":\"expedita\",\"start_date\":\"beatae\",\"end_date\":\"ipsum\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Roles  APIs",
+            "description": "\nAPIs for Roles management",
+            "item": [
+                {
+                    "name": "POST api\/v1\/roles\/list",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/roles\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/roles\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/roles\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/roles\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/roles\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"ad\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/roles\/edit",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/roles\/edit",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/roles\/edit"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"role_id\":220891284.462391}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/roles\/update",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/roles\/update",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/roles\/update"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"role_id\":\"qui\",\"name\":\"totam\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/roles\/delete",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/roles\/delete",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/roles\/delete"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"role_id\":34169.27949226}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/roles\/assign-permission",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/roles\/assign-permission",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/roles\/assign-permission"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"role_id\":3483.7933,\"permission_id\":\"omnis\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Users APIs",
+            "description": "\nAPIs for Users management",
+            "item": [
+                {
+                    "name": "POST api\/v1\/users\/list",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/list",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/list"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/users\/create",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/create",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/create"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"architecto\",\"email\":\"f@xter.mv83.vim5.xzg3.0z5m.zehpit$\\\/ix\",\"password\":\"li7w?<2#\\\\N#p&9bY\",\"user_type\":\"atque\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST api\/v1\/users\/edit",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/users\/edit",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/users\/edit"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_type\":\"animi\",\"user_id\":\"enim\"}"
                         },
                         "description": "",
                         "auth": {
