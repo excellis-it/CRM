@@ -70,7 +70,7 @@ class AuthController extends Controller
         }
 
         try {
-            if(Auth::attempt(['email'=> $request->email, 'password' => $request->password]))
+            if(Auth::attempt(['email' => $request->email, 'password' => $request->password]))
             {
                 $user = User::where('email', $request->email)->select('id', 'name', 'email', 'status')->first();
                 if ($user->status == 1 ) {

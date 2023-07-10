@@ -17,6 +17,8 @@ class CreateAssignProjectsTable extends Migration
             $table->id();
             $table->foreignId('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->foreignId('employee_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('assign_by')->references('id')->on('users')->onDelete('cascade');
+            $table->date('assign_date')->nullable();
             $table->timestamps();
         });
     }

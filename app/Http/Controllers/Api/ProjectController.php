@@ -8,9 +8,11 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\AssignProject;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\ProjectAssignMail;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * @group Project APIs
@@ -204,14 +206,25 @@ class ProjectController extends Controller
             }
             $project_id = $request->project_id;
             foreach($request->user_id as $key => $value){
-                $assignProject = new AssignProject;
-                $assignProject->project_id = $project_id;
-                $assignProject->employee_id = $value;         
-                $assignProject->save();
+                $assign_project = new AssignProject;
+                $assign_project->project_id = $project_id;
+                $assign_project->employee_id = $value; 
+                $assign_project->assign_by = Auth::user()->id; 
+                $assign_project->assign_date = date('Y-m-d'); 
+                $user = User::where('id', $value)->first();
+                $project = Project::where('id', $project_id)->first();
+
+                $maildata = [
+                    'user' => $user,
+                    'project' => $project,
+                ];
+                $assign_project->save(); 
+
+                Mail::to($user->email)->send(new ProjectAssignMail($maildata));
             }
             
             return response()->json([
-                'data' => $assignProject,
+                'data' => $assign_project,
                 'success' => true,
                 'message' => 'Project assigned successfully'
             ]);
