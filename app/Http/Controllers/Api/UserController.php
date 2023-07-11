@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
+use App\Mail\UserRegistrationMail;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * @group Users APIs
@@ -163,6 +165,11 @@ class UserController extends Controller
             $user->status = 1;
             $user->save();
             $user->assignRole($request->user_type);
+
+            $maildata = [
+                'user' => $user,
+            ];
+            Mail::to($user->email)->send(new UserRegistrationMail($maildata));
 
             return response()->json(['data' => $user ,'status' => true, 'statusCode' => 200, 'message' => 'User created successfully'], 200);
         }catch (\Throwable $th) {

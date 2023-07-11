@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\AssignTask;
+use App\Mail\assignTaskMail;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 
@@ -280,11 +282,38 @@ class TaskController extends Controller
         }    
     }
 
+    /*
+    * assign task api
+    * @bodyParam task_id int required The task id of the task.
+    * @bodyParam user_id int required The user id of the user.
+    * @bodyParam due_on date required The due date of the task.
+    * @response 200 {
+    *   "data": {
+    *    "id": 1,
+    *    "project_id": 1,
+    *    "title": "make an authentication",
+    *    "description": "lorem ipsum dolor sit amet",
+    *    "created_at": "2023-06-30T07:32:34.000000Z",
+    *    "updated_at": "2023-06-30T07:32:34.000000Z"
+    *    },
+    *  "success": true,
+    *  "message": "Task assigned successfully"
+    * }
+
+    * @response 401 {
+    *    "status_code": 401,
+    *    "message": "Task not assigned",
+    *    "success": false,
+    * }
+    */
+
+
     public function assignTask(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'task_id' => 'required|exists:tasks,id',
             'user_id' => 'required|exists:users,id',
+            'due_on' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -303,8 +332,20 @@ class TaskController extends Controller
         try{
             $task = new AssignTask;
             if($task){
-                $task->user_id = $request->user_id;
+                $task->task_id = $request->task_id;
+                $task->emp_id = $request->user_id;
+                $task->due_on = $request->due_on;
+                $task->notes = $request->notes;
                 $task->save();
+                $user = User::find($request->user_id);
+                $task = Task::find($request->task_id)->with('project')->first();
+
+                $maildata = [
+                    'user' => $user,
+                    'project' => $task->project,
+                ];
+                Mail::to($user->email)->send(new assignTaskMail($maildata));
+    
                 return response()->json([
                     'data' => $task,
                     'success' => true,

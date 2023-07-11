@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ProjectAssignMail extends Mailable
+class assignTaskMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $maildata;
@@ -30,7 +30,7 @@ class ProjectAssignMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.assignMail')
+        return $this->markdown('mail.assignTaskMail')
         ->with('maildata', $this->maildata);
     }
 }
