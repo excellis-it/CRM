@@ -220,7 +220,7 @@ class ProjectController extends Controller
                 ];
                 $assign_project->save(); 
 
-                Mail::to($user->email)->send(new ProjectAssignMail($maildata));
+                Mail::to($user->email)->queue(new ProjectAssignMail($maildata));
             }
             
             return response()->json([
