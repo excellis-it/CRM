@@ -19,6 +19,15 @@ use Illuminate\Support\Facades\Mail;
  */
 class UserController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:User list', ['only' => ['userList']]);
+        $this->middleware('permission:User create', ['only' => ['userCreate']]);
+        $this->middleware('permission:User edit', ['only' => ['userEdit']]);
+        $this->middleware('permission:User by-role', ['only' => ['usersByRole']]);
+        
+    }
     
     /* 
     *  @user list
@@ -138,6 +147,7 @@ class UserController extends Controller
             'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'password' => 'required|min:8',
             'user_type' => 'required|exists:roles,name',
+            'designation' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -224,6 +234,53 @@ class UserController extends Controller
         }catch (\Throwable $th) {
             return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
         }
+    }
+
+    /*
+    *  @user list by role
+    *  @response 200 {
+    *    "data": [
+    *            {
+    *    "id": 3,
+    *    "name": "Swarna Designer",
+    *    "email": "Swarna@yopmail.com",
+    *    "email_verified_at": null,
+    *    "status": 1,
+    *    "created_at": "2023-07-10T10:18:37.000000Z",
+    *    "updated_at": "2023-07-10T10:18:37.000000Z"
+    *    }
+    *    ],
+    *    "status": true,
+    *    "statusCode": 200,
+    *    "message": "Users found successfully"
+    * },
+    *    @response 401 {
+    *    "status": false,
+    *    "statusCode": 401,
+    *    "message": "Users not found"
+    * },
+    *  
+    */          
+
+    public function usersByRole(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_type' => 'required|exists:roles,name',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'message' => $validator->errors()->first()], 401);
+        }
+        try {
+            $users = User::role($request->user_type)->get();
+            if ($users) {
+                return response()->json(['data' => $users ,'status' => true, 'statusCode' => 200, 'message' => 'Users found successfully'], 200);
+            }else{
+                return response()->json(['status' => false, 'statusCode' => 401, 'message' => 'Users not found'], 401);
+            }
+        }catch (\Throwable $th) {
+            return response()->json(['status' => false, 'statusCode' => 401, 'error' => $th->getMessage()], 401);
+        }    
     }
 
 }
